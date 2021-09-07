@@ -18,6 +18,7 @@ client.connect(err => {
     app.get('/all_ToDo_List', (req, res) => {
         ToDoCollection.find({email: req.query.email })
             .toArray((err, products) => {
+                console.log(products)
                 res.send(products)
             })
     })
@@ -29,12 +30,13 @@ client.connect(err => {
             })
     })
     app.patch('/edit_To_Do/:id', (req, res) => {
+        console.log(req.params.id)
         ToDoCollection.updateOne({ _id:req.params.id},
           {
             $set: { completed:req.body.completed}
           })
           .then(result => {
-              console.log(result)
+              console.log(result,"updated data")
             res.send(result)
           })
       })
@@ -42,6 +44,7 @@ client.connect(err => {
     app.delete('/delete_To_Do/:id', (req, res) => {
         ToDoCollection.deleteOne({ _id:req.params.id })
             .then(result => {
+                console.log(result,"result deleted data ")
                 res.send(result.deletedCount>0)
             })
     })
