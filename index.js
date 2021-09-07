@@ -29,7 +29,7 @@ client.connect(err => {
             })
     })
     app.patch('/edit_To_Do/:id', (req, res) => {
-        ToDoCollection.updateOne({ _id: ObjectID(req.params.id) },
+        ToDoCollection.updateOne({ _id:req.params.id},
           {
             $set: { completed:req.body.completed}
           })
@@ -40,7 +40,7 @@ client.connect(err => {
       })
     
     app.delete('/delete_To_Do/:id', (req, res) => {
-        ToDoCollection.deleteOne({ _id: ObjectID(req.params.id) })
+        ToDoCollection.deleteOne({ _id:req.params.id })
             .then(result => {
                 res.send(result.deletedCount>0)
             })
