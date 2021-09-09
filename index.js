@@ -40,12 +40,11 @@ client.connect(err => {
             res.send(result)
           })
       })
-    
     app.delete('/delete_To_Do/:id', (req, res) => {
         ToDoCollection.deleteOne({ _id:ObjectID(req.params.id) })
             .then(result => {
                 console.log(result,"result deleted data ")
-                res.send(result.deletedCount>0)
+                res.send(result)
             })
     })
 });
